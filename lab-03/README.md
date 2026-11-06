@@ -1,6 +1,6 @@
 # Lab 3: REST API, Query Parameters, Validation, and Debugging
 
-> **🔗 Live Deployment URL:** [https://backend-lab-lab-03.onrender.com](https://backend-lab-lab-03.onrender.com) *(or local server at `http://localhost:3000`)*
+> **🔗 Live Deployment URL:** [https://backend-lab-lab-03-i8xb.onrender.com](https://backend-lab-lab-03-i8xb.onrender.com) *(or local server at `http://localhost:3000`)*
 
 ---
 
@@ -8,13 +8,13 @@
 
 | Field | Details |
 |---|---|
-| **Student Name** | SOMULA SUDHARSHAN REDDY |
-| **Registration Number** | 252U1R1231 |
+| **Student Name** | Vemuri Jaswanth |
+| **Registration Number** | 252U1R1256 |
 | **Section** | CSE-CORE-2E |
 | **Course** | Backend Development Fundamentals |
 | **Faculty** | Mr Yugandhar Gurjalwar |
 | **Institution** | Aurora Deemed-to-be-University |
-| **GitHub Repository** | [https://github.com/ssrssudharshanreddy/backend_lab](https://github.com/ssrssudharshanreddy/backend_lab) |
+| **GitHub Repository** | [https://github.com/JaswanthCodeHub/backend_lab](https://github.com/JaswanthCodeHub/backend_lab) |
 | **Repository Path** | `lab-03/` in course GitHub repository |
 
 ---
@@ -153,13 +153,13 @@ All resource endpoints adhere to REST conventions: resources are named as plural
 
 | HTTP Method | Path | Live URL | Description | Success Code | Error Codes |
 |:---:|---|:---:|---|:---:|:---:|
-| `GET` | `/` | [Open Live Link](https://backend-lab-lab-03.onrender.com/) | API Directory, student metadata & system status | `200 OK` | `500` |
-| `GET` | `/books` | [Open Live Link](https://backend-lab-lab-03.onrender.com/books) | Retrieve books with optional search, sorting, pagination, and price filters | `200 OK` | `400`, `500` |
+| `GET` | `/` | [Open Live Link](https://backend-lab-lab-03-i8xb.onrender.com/) | API Directory, student metadata & system status | `200 OK` | `500` |
+| `GET` | `/books` | [Open Live Link](https://backend-lab-lab-03-i8xb.onrender.com/books) | Retrieve books with optional search, sorting, pagination, and price filters | `200 OK` | `400`, `500` |
 | `GET` | `/books/:bookId` | [Open Live Link (ID 1)](https://backend-lab-lab-lab-03.onrender.com/books/1) | Retrieve a single book record by ID | `200 OK` | `400`, `404`, `500` |
-| `POST` | `/books` | [API Endpoint](https://backend-lab-lab-03.onrender.com/books) | Validate payload and insert a new book record | `201 Created` | `400`, `500` |
-| `PUT` | `/books/:bookId` | [API Endpoint (ID 1)](https://backend-lab-lab-03.onrender.com/books/1) | Validate payload and update an existing book by ID | `200 OK` | `400`, `404`, `500` |
-| `DELETE` | `/books/:bookId` | [API Endpoint (ID 10)](https://backend-lab-lab-03.onrender.com/books/10) | Delete an existing book by ID | `200 OK` | `400`, `404`, `500` |
-| `ALL` | `/*` | [Open Live Link (404 Test)](https://backend-lab-lab-03.onrender.com/books/99999) | Fallback route handler for undefined endpoints | — | `404 Not Found` |
+| `POST` | `/books` | [API Endpoint](https://backend-lab-lab-03-i8xb.onrender.com/books) | Validate payload and insert a new book record | `201 Created` | `400`, `500` |
+| `PUT` | `/books/:bookId` | [API Endpoint (ID 1)](https://backend-lab-lab-03-i8xb.onrender.com/books/1) | Validate payload and update an existing book by ID | `200 OK` | `400`, `404`, `500` |
+| `DELETE` | `/books/:bookId` | [API Endpoint (ID 10)](https://backend-lab-lab-03-i8xb.onrender.com/books/10) | Delete an existing book by ID | `200 OK` | `400`, `404`, `500` |
+| `ALL` | `/*` | [Open Live Link (404 Test)](https://backend-lab-lab-03-i8xb.onrender.com/books/99999) | Fallback route handler for undefined endpoints | — | `404 Not Found` |
 
 ---
 
@@ -392,25 +392,25 @@ Displays Nodemon listening and running on `http://localhost:3000/`:
 ![Server Startup](screenshots/02-server-start-nodemon.png)
 
 ### 3. Search Query Parameter (`GET /books?search_q=fire`)
-- **Render Live URL:** [https://backend-lab-lab-03.onrender.com/books?search_q=fire](https://backend-lab-lab-03.onrender.com/books?search_q=fire)
+- **Render Live URL:** [https://backend-lab-lab-03-i8xb.onrender.com/books?search_q=fire](https://backend-lab-lab-03-i8xb.onrender.com/books?search_q=fire)
 - **Expected HTTP Status:** `200 OK`
 
 ![Search Query](screenshots/03-search-query.png)
 
 ### 4. Sorting by Price Descending (`GET /books?order_by=price&order=DESC`)
-- **Render Live URL:** [https://backend-lab-lab-03.onrender.com/books?order_by=price&order=DESC](https://backend-lab-lab-03.onrender.com/books?order_by=price&order=DESC)
+- **Render Live URL:** [https://backend-lab-lab-03-i8xb.onrender.com/books?order_by=price&order=DESC](https://backend-lab-lab-03-i8xb.onrender.com/books?order_by=price&order=DESC)
 - **Expected HTTP Status:** `200 OK`
 
 ![Sorting by Price](screenshots/04-sorting-price-desc.png)
 
 ### 5. Pagination with Limit & Offset (`GET /books?limit=2&offset=5`)
-- **Render Live URL:** [https://backend-lab-lab-03.onrender.com/books?limit=2&offset=5](https://backend-lab-lab-03.onrender.com/books?limit=2&offset=5)
+- **Render Live URL:** [https://backend-lab-lab-03-i8xb.onrender.com/books?limit=2&offset=5](https://backend-lab-lab-03-i8xb.onrender.com/books?limit=2&offset=5)
 - **Expected HTTP Status:** `200 OK`
 
 ![Pagination](screenshots/05-pagination-limit-offset.png)
 
 ### 6. Price Range Filter (`GET /books?min_price=250&max_price=400`)
-- **Render Live URL:** [https://backend-lab-lab-03.onrender.com/books?min_price=250&max_price=400](https://backend-lab-lab-03.onrender.com/books?min_price=250&max_price=400)
+- **Render Live URL:** [https://backend-lab-lab-03-i8xb.onrender.com/books?min_price=250&max_price=400](https://backend-lab-lab-03-i8xb.onrender.com/books?min_price=250&max_price=400)
 - **Expected HTTP Status:** `200 OK`
 
 ![Price Filter](screenshots/06-price-range-filter.png)
@@ -421,7 +421,7 @@ Displays Nodemon listening and running on `http://localhost:3000/`:
 ![POST Create Book](screenshots/07-post-create-book.png)
 
 ### 8. GET Missing Book (`404 Not Found` on `/books/99999`)
-- **Render Live URL:** [https://backend-lab-lab-03.onrender.com/books/99999](https://backend-lab-lab-03.onrender.com/books/99999)
+- **Render Live URL:** [https://backend-lab-lab-03-i8xb.onrender.com/books/99999](https://backend-lab-lab-03-i8xb.onrender.com/books/99999)
 - **Expected HTTP Status:** `404 Not Found`
 
 ![GET Missing Book 404](screenshots/08-get-missing-book-404.png)
@@ -498,15 +498,15 @@ As part of the lab debugging curriculum, four intentional errors were analyzed, 
 4. **Deploy** and wait for the build to complete.
 
 5. **Verify by visiting the deployed Render URLs:**
-   - **Main Server / Student Info:** [https://backend-lab-lab-03.onrender.com/](https://backend-lab-lab-03.onrender.com/)
-   - **GET All Books:** [https://backend-lab-lab-03.onrender.com/books](https://backend-lab-lab-03.onrender.com/books)
-   - **GET Search Title:** [https://backend-lab-lab-03.onrender.com/books?search_q=fire](https://backend-lab-lab-03.onrender.com/books?search_q=fire)
-   - **GET Sort by Price:** [https://backend-lab-lab-03.onrender.com/books?order_by=price&order=DESC](https://backend-lab-lab-03.onrender.com/books?order_by=price&order=DESC)
-   - **GET Pagination:** [https://backend-lab-lab-03.onrender.com/books?limit=2&offset=5](https://backend-lab-lab-03.onrender.com/books?limit=2&offset=5)
-   - **GET Price Filter:** [https://backend-lab-lab-03.onrender.com/books?min_price=250&max_price=400](https://backend-lab-lab-03.onrender.com/books?min_price=250&max_price=400)
-   - **GET Combined Filters:** [https://backend-lab-lab-03.onrender.com/books?search_q=The&min_price=200&max_price=400&order_by=price&order=ASC&limit=5&offset=0](https://backend-lab-lab-03.onrender.com/books?search_q=The&min_price=200&max_price=400&order_by=price&order=ASC&limit=5&offset=0)
-   - **GET Single Book (ID 1):** [https://backend-lab-lab-03.onrender.com/books/1](https://backend-lab-lab-03.onrender.com/books/1)
-   - **GET 404 Error Test (ID 999):** [https://backend-lab-lab-03.onrender.com/books/999](https://backend-lab-lab-03.onrender.com/books/999)
+   - **Main Server / Student Info:** [https://backend-lab-lab-03-i8xb.onrender.com/](https://backend-lab-lab-03-i8xb.onrender.com/)
+   - **GET All Books:** [https://backend-lab-lab-03-i8xb.onrender.com/books](https://backend-lab-lab-03-i8xb.onrender.com/books)
+   - **GET Search Title:** [https://backend-lab-lab-03-i8xb.onrender.com/books?search_q=fire](https://backend-lab-lab-03-i8xb.onrender.com/books?search_q=fire)
+   - **GET Sort by Price:** [https://backend-lab-lab-03-i8xb.onrender.com/books?order_by=price&order=DESC](https://backend-lab-lab-03-i8xb.onrender.com/books?order_by=price&order=DESC)
+   - **GET Pagination:** [https://backend-lab-lab-03-i8xb.onrender.com/books?limit=2&offset=5](https://backend-lab-lab-03-i8xb.onrender.com/books?limit=2&offset=5)
+   - **GET Price Filter:** [https://backend-lab-lab-03-i8xb.onrender.com/books?min_price=250&max_price=400](https://backend-lab-lab-03-i8xb.onrender.com/books?min_price=250&max_price=400)
+   - **GET Combined Filters:** [https://backend-lab-lab-03-i8xb.onrender.com/books?search_q=The&min_price=200&max_price=400&order_by=price&order=ASC&limit=5&offset=0](https://backend-lab-lab-03-i8xb.onrender.com/books?search_q=The&min_price=200&max_price=400&order_by=price&order=ASC&limit=5&offset=0)
+   - **GET Single Book (ID 1):** [https://backend-lab-lab-03-i8xb.onrender.com/books/1](https://backend-lab-lab-03-i8xb.onrender.com/books/1)
+   - **GET 404 Error Test (ID 999):** [https://backend-lab-lab-03-i8xb.onrender.com/books/999](https://backend-lab-lab-03-i8xb.onrender.com/books/999)
 
 ---
 
@@ -546,8 +546,8 @@ Through **Lab 3**, I achieved the following learning outcomes:
 
 ## 👤 Author & Academic Attribution
 
-**SOMULA SUDHARSHAN REDDY**  
-**Registration Number:** `252U1R1231`  
+**Vemuri Jaswanth**<br>
+**Registration Number:** `252U1R1256`<br>
 **Section:** `CSE-CORE-2E`  
 **Department of Computer Science & Engineering**  
 **Aurora Deemed-to-be-University**

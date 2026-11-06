@@ -8,13 +8,13 @@
 
 | Field | Details |
 |---|---|
-| **Student Name** | SOMULA SUDHARSHAN REDDY |
-| **Registration Number** | 252U1R1231 |
+| **Student Name** | Vemuri Jaswanth |
+| **Registration Number** | 252U1R1256 |
 | **Section** | CSE-CORE-2E |
 | **Course** | Backend Development Fundamentals |
 | **Faculty** | Mr Yugandhar Gurjalwar |
 | **Institution** | Aurora Deemed-to-be-University |
-| **GitHub Repository** | [https://github.com/ssrssudharshanreddy/backend_lab](https://github.com/ssrssudharshanreddy/backend_lab) |
+| **GitHub Repository** | [https://github.com/JaswanthCodeHub/backend_lab](https://github.com/JaswanthCodeHub/backend_lab) |
 | **Repository Path** | `lab-02/` in course GitHub repository |
 
 ---
@@ -452,8 +452,8 @@ Through **Lab 2**, I achieved the following learning outcomes:
 
 ## 👤 Author & Academic Attribution
 
-**SOMULA SUDHARSHAN REDDY**  
-**Registration Number:** `252U1R1231`  
+**Vemuri Jaswanth**<br>
+**Registration Number:** `252U1R1256`<br>
 **Section:** `CSE-CORE-2E`  
 **Department of Computer Science & Engineering**  
 **Aurora Deemed-to-be-University**
