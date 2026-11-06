@@ -1,0 +1,89 @@
+### GET all books (default values)
+GET http://localhost:3000/books
+
+### Search partial title
+GET http://localhost:3000/books?search_q=fire
+
+### Sort by price descending
+GET http://localhost:3000/books?order_by=price&order=DESC
+
+### Pagination
+GET http://localhost:3000/books?limit=5&offset=5
+
+### Price range filter
+GET http://localhost:3000/books?min_price=250&max_price=400
+
+### Combined search, sort, pagination, price range
+GET http://localhost:3000/books?search_q=the&order_by=title&order=ASC&limit=5&offset=0&min_price=200&max_price=500
+
+### GET a book by ID (success)
+GET http://localhost:3000/books/1
+
+### GET missing book (404)
+GET http://localhost:3000/books/99999
+
+### POST valid book (201)
+POST http://localhost:3000/books
+Content-Type: application/json
+
+{
+  "title": "JavaScript Basics",
+  "author": "John Smith",
+  "price": 400,
+  "pages": 300
+}
+
+### POST missing title (400)
+POST http://localhost:3000/books
+Content-Type: application/json
+
+{
+  "author": "John Smith",
+  "price": 400,
+  "pages": 300
+}
+
+### POST non-numeric price (400)
+POST http://localhost:3000/books
+Content-Type: application/json
+
+{
+  "title": "Test Book",
+  "author": "John Smith",
+  "price": "four hundred",
+  "pages": 300
+}
+
+### PUT valid book (200)
+PUT http://localhost:3000/books/1
+Content-Type: application/json
+
+{
+  "title": "Updated Wings of Fire",
+  "author": "A.P.J. Abdul Kalam",
+  "price": 300,
+  "pages": 200
+}
+
+### PUT missing book (404)
+PUT http://localhost:3000/books/99999
+Content-Type: application/json
+
+{
+  "title": "No Such Book",
+  "author": "Unknown",
+  "price": 100,
+  "pages": 50
+}
+
+### DELETE book (200)
+DELETE http://localhost:3000/books/10
+
+### DELETE missing book (404)
+DELETE http://localhost:3000/books/99999
+
+### Invalid order value (400)
+GET http://localhost:3000/books?order=sideways
+
+### Invalid limit (400)
+GET http://localhost:3000/books?limit=-2

@@ -1,0 +1,31 @@
+
+### GET all books
+GET http://localhost:3000/books/
+
+### GET book by ID
+GET http://localhost:3000/books/1/
+
+### POST add a book
+POST http://localhost:3000/books/
+Content-Type: application/json
+
+{
+    "title": "JavaScript Basics",
+    "author": "John Smith",
+    "price": 400,
+    "pages": 300
+}
+
+### PUT update a book
+PUT http://localhost:3000/books/1/
+Content-Type: application/json
+
+{
+    "title": "Updated Wings of Fire",
+    "author": "A.P.J. Abdul Kalam",
+    "price": 300,
+    "pages": 200
+}
+
+### DELETE a book
+DELETE http://localhost:3000/books/10/

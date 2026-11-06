@@ -1,0 +1,34 @@
+### ==============================================
+### REST Client - Lab 09 Express API Tests
+### Extension: REST Client (Huachao Mao)
+### ==============================================
+
+@baseUrl = http://localhost:3000
+
+### 1. Test Root Route
+GET {{baseUrl}}/
+Accept: application/json
+
+###
+
+### 2. Test About / Health Route
+GET {{baseUrl}}/about
+Accept: application/json
+
+###
+
+### 3. Test Time Route
+GET {{baseUrl}}/time
+Accept: text/plain
+
+###
+
+### 4. Test API Health (if present)
+GET {{baseUrl}}/api/health
+Accept: application/json
+
+###
+
+### 5. Test 404 Not Found Route
+GET {{baseUrl}}/non-existent-route
+Accept: text/plain

@@ -1,0 +1,12 @@
+
+### GET Welcome Page
+GET http://localhost:3000/
+
+### GET About
+GET http://localhost:3000/about
+
+### GET Current Date and Time
+GET http://localhost:3000/time
+
+### GET Unknown Route (404)
+GET http://localhost:3000/contact
