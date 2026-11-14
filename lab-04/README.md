@@ -1,8 +1,15 @@
 # Lab 04 — Registration, Login and JWT
 
-- Student name: [Enter student name]
-- Registration number: [Enter registration number]
-- Section: [Enter section]
+| Field | Details |
+|---|---|
+| Student | Vemuri Jaswanth |
+| Registration number | 252U1R1256 |
+| Section | CSE-CORE-2E |
+| Course | Backend Development Fundamentals |
+| Faculty | Mr Yugandhar Gurjalwar |
+| Institution | Aurora Deemed-to-be-University |
+
+For the academic submission, see the [Lab 04 report](LAB-04-REPORT.md).
 
 ## Objective
 Implement registration and login using SQLite, bcrypt password hashes, and signed JWT tokens.
