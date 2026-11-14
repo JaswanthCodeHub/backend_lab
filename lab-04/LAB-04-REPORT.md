@@ -94,3 +94,8 @@ The implementation and tests are present. JavaScript syntax and JSON checks pass
 ## 9. Conclusion
 
 The experiment connects registration, password hashing, and signed token issuance in one Express service. The Postman collection and automated suite provide a repeatable way to check the expected behavior once dependencies are installed.
+
+## References
+
+- [Lab 03 README](../lab-03/README.md) provided the report structure and the reference for Express and SQLite setup.
+- [Lab 04 README](README.md) provides the authentication API contract, setup commands, and Postman examples.

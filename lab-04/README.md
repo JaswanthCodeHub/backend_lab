@@ -29,6 +29,7 @@ lab-04/
   package-lock.json
   lab-04.http
   lab-04.postman_collection.json
+  LAB-04-REPORT.md
   README.md
   .gitignore
 ```
@@ -125,7 +126,7 @@ git diff --cached --check
 git commit -m "Implement Lab 04 registration login and JWT"
 git push origin HEAD
 ```
-Only run commit/push yourself after review and adding the required screenshots. node_modules, environment files and local SQLite data are ignored. No changes have been committed or pushed automatically.
+Use these commands when submitting future Lab 04 updates, including the required screenshots. Git ignores `node_modules`, environment files, and local SQLite data.
 
 ## Viva preparation
 - Registration hashes the password before inserting; login compares against that hash.
