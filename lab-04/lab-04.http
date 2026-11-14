@@ -1,34 +1,66 @@
-### ==============================================
-### REST Client - Lab 04 Express API Tests
-### Extension: REST Client (Huachao Mao)
-### ==============================================
+@baseUrl = http://localhost:5002
+@username = jaswanth
 
-@baseUrl = http://localhost:3000
+### Valid registration - expected 201
+POST {{baseUrl}}/register
+Content-Type: application/json
 
-### 1. Test Root Route
-GET {{baseUrl}}/
-Accept: application/json
+{
+  "username": "{{username}}",
+  "name": "Jaswanth",
+  "password": "Jaswanth123"
+}
 
-###
+### Duplicate registration - expected 400
+POST {{baseUrl}}/register
+Content-Type: application/json
 
-### 2. Test About / Health Route
-GET {{baseUrl}}/about
-Accept: application/json
+{
+  "username": "{{username}}",
+  "name": "Jaswanth",
+  "password": "Jaswanth123"
+}
 
-###
+### Missing registration field - expected 400
+POST {{baseUrl}}/register
+Content-Type: application/json
 
-### 3. Test Time Route
-GET {{baseUrl}}/time
-Accept: text/plain
+{
+  "username": "{{username}}",
+  "password": "Jaswanth123"
+}
 
-###
+### Valid login - expected 200
+POST {{baseUrl}}/login
+Content-Type: application/json
 
-### 4. Test API Health (if present)
-GET {{baseUrl}}/api/health
-Accept: application/json
+{
+  "username": "{{username}}",
+  "password": "Jaswanth123"
+}
 
-###
+### Unknown username - expected 400
+POST {{baseUrl}}/login
+Content-Type: application/json
 
-### 5. Test 404 Not Found Route
-GET {{baseUrl}}/non-existent-route
-Accept: text/plain
+{
+  "username": "{{username}}_unknown",
+  "password": "Jaswanth123"
+}
+
+### Incorrect password - expected 400
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{
+  "username": "{{username}}",
+  "password": "Wrong123"
+}
+
+### Missing login field - expected 400
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{
+  "username": "{{username}}"
+}
