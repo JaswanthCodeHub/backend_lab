@@ -1,34 +1,55 @@
-### ==============================================
-### REST Client - Lab 04 Express API Tests
-### Extension: REST Client (Huachao Mao)
-### ==============================================
+### 1. Register a new user (201)
+POST http://localhost:3000/register
+Content-Type: application/json
 
-@baseUrl = http://localhost:3000
+{
+  "username": "sudharshan_reddy",
+  "name": "Sudharshan Reddy",
+  "password": "pass123"
+}
 
-### 1. Test Root Route
-GET {{baseUrl}}/
-Accept: application/json
+### 2. Register the same username again (400)
+POST http://localhost:3000/register
+Content-Type: application/json
 
-###
+{
+  "username": "sudharshan_reddy",
+  "name": "Sudharshan Reddy",
+  "password": "pass123"
+}
 
-### 2. Test About / Health Route
-GET {{baseUrl}}/about
-Accept: application/json
+### 3. Login with correct credentials (200)
+POST http://localhost:3000/login
+Content-Type: application/json
 
-###
+{
+  "username": "sudharshan_reddy",
+  "password": "pass123"
+}
 
-### 3. Test Time Route
-GET {{baseUrl}}/time
-Accept: text/plain
+### 4. Login with an unknown username (400)
+POST http://localhost:3000/login
+Content-Type: application/json
 
-###
+{
+  "username": "unknownuser",
+  "password": "pass123"
+}
 
-### 4. Test API Health (if present)
-GET {{baseUrl}}/api/health
-Accept: application/json
+### 5. Login with a wrong password (400)
+POST http://localhost:3000/login
+Content-Type: application/json
 
-###
+{
+  "username": "sudharshan_reddy",
+  "password": "wrong123"
+}
 
-### 5. Test 404 Not Found Route
-GET {{baseUrl}}/non-existent-route
-Accept: text/plain
+### 6. Register with missing data (400)
+POST http://localhost:3000/register
+Content-Type: application/json
+
+{
+  "username": "newuser",
+  "name": "New User"
+}

@@ -1,44 +1,149 @@
-const express = require('express');
-const cors = require('cors');
-require('dotenv').config();
+const express = require('express')
+const sqlite3 = require('sqlite3')
+const {open} = require('sqlite')
+const path = require('path')
+const fs = require('fs')
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
-const app = express();
-const PORT = process.env.PORT || 5002;
+const app = express()
+app.use(express.json())
 
-// Core Middleware
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+const dbDir = path.join(__dirname, 'database')
+if (!fs.existsSync(dbDir)) {
+  fs.mkdirSync(dbDir, {recursive: true})
+}
 
-// Root Route
-app.get('/', (req, res) => {
-  res.json({
-    message: 'Welcome to lab-04 Backend API',
-    status: 'online',
-    timestamp: new Date().toISOString()
-  });
-});
+const dbPath = path.join(dbDir, 'users.db')
+const secretKey = 'MY_SECRET_KEY'
+let db = null
 
-// Health Check Route
-app.get('/api/health', (req, res) => {
-  res.json({
-    status: 'OK',
-    uptime: `${Math.floor(process.uptime())}s`,
-    timestamp: new Date().toISOString()
-  });
-});
+const initializeDBAndServer = async () => {
+  try {
+    db = await open({
+      filename: dbPath,
+      driver: sqlite3.Database
+    })
 
-// 404 Handler
-app.use((req, res) => {
-  res.status(404).json({
-    error: 'Route not found'
-  });
-});
+    await db.exec(`
+      CREATE TABLE IF NOT EXISTS user (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT UNIQUE,
+        name TEXT,
+        password TEXT
+      );
+    `)
 
-// Start Server
-app.listen(PORT, () => {
-  console.log('=================================');
-  console.log(' lab-04 Server running on:');
-  console.log(` http://localhost:${PORT}`);
-  console.log('=================================');
-});
+    const port = process.env.PORT || 3000
+    app.listen(port, () => {
+      console.log(`Server Running at http://localhost:${port}/`)
+    })
+  } catch (error) {
+    console.log(`DB Error: ${error.message}`)
+    process.exit(1)
+  }
+}
+
+app.get('/', (request, response) => {
+  response.status(200).json({
+    message: 'Lab 4: Registration, Login and JWT Authentication',
+    student: {
+      name: 'SOMULA SUDHARSHAN REDDY',
+      registrationNumber: '252U1R1231',
+      section: 'CSE-CORE-2E',
+      faculty: 'Mr Yugandhar Gurjalwar',
+      college: 'Aurora Deemed-to-be-University'
+    },
+    status: 'Online',
+    endpoints: {
+      register: 'POST /register',
+      login: 'POST /login'
+    }
+  })
+})
+
+app.get('/register', (request, response) => {
+  response.status(200).json({
+    message: 'Register endpoint is active. Send a POST request with JSON body to register a user.',
+    method: 'POST',
+    endpoint: '/register',
+    sampleRequestBody: {
+      username: 'sudharshan',
+      name: 'Sudharshan Reddy',
+      password: 'pass123'
+    }
+  })
+})
+
+app.post('/register', async (request, response) => {
+  try {
+    const {username, name, password} = request.body
+
+    if (!username || !name || !password) {
+      return response.status(400).send('Username, name and password are required')
+    }
+
+    const selectUserQuery = 'SELECT * FROM user WHERE username = ?;'
+    const existingUser = await db.get(selectUserQuery, [username])
+
+    if (existingUser !== undefined) {
+      return response.status(400).send('Username already exists')
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10)
+    const createUserQuery = 'INSERT INTO user (username, name, password) VALUES (?, ?, ?);'
+    await db.run(createUserQuery, [username, name, hashedPassword])
+
+    response.status(201).send('User registered successfully')
+  } catch (error) {
+    response.status(500).send('Unable to register user')
+  }
+})
+
+app.get('/login', (request, response) => {
+  response.status(200).json({
+    message: 'Login endpoint is active. Send a POST request with JSON body to login and receive a JWT token.',
+    method: 'POST',
+    endpoint: '/login',
+    sampleRequestBody: {
+      username: 'sudharshan',
+      password: 'pass123'
+    }
+  })
+})
+
+app.post('/login', async (request, response) => {
+  try {
+    const {username, password} = request.body
+
+    if (!username || !password) {
+      return response.status(400).send('Username and password are required')
+    }
+
+    const selectUserQuery = 'SELECT * FROM user WHERE username = ?;'
+    const user = await db.get(selectUserQuery, [username])
+
+    if (user === undefined) {
+      return response.status(400).send('Invalid username')
+    }
+
+    const isPasswordMatched = await bcrypt.compare(password, user.password)
+
+    if (!isPasswordMatched) {
+      return response.status(400).send('Invalid password')
+    }
+
+    const payload = {username: username}
+    const jwtToken = jwt.sign(payload, secretKey)
+
+    response.status(200).json({jwt_token: jwtToken})
+  } catch (error) {
+    response.status(500).send('Unable to login')
+  }
+})
+
+app.use((request, response) => {
+  response.status(404).send('Page not found')
+})
+
+initializeDBAndServer()
