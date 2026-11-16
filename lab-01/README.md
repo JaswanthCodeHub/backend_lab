@@ -1,6 +1,6 @@
 # Lab 1: Node.js and Express Server
 
-> **🔗 Live Deployment URL:** [https://backend-lab-lab-01.onrender.com](https://backend-lab-lab-01.onrender.com) *(or local server at `http://localhost:3000`)*
+> **Local server** [http://localhost:3000](http://localhost:3000) · **Lab 04 on Render** [https://backend-lab-h2hp.onrender.com/](https://backend-lab-h2hp.onrender.com/)
 
 ---
 
@@ -113,12 +113,12 @@ The Express application is constructed in [`server.js`](server.js):
 
 ## 📡 API Endpoints Directory
 
-| HTTP Method | Route Endpoint | Live URL | Response Data Type | Description | Expected Status |
+| HTTP Method | Route Endpoint | Local URL | Response Data Type | Description | Expected Status |
 |:---:|---|:---:|:---:|---|:---:|
-| `GET` | `/` | [Open Live Link](https://backend-lab-lab-01.onrender.com/) | `text/html` | Server greeting and welcome message | `200 OK` |
-| `GET` | `/about` | [Open Live Link](https://backend-lab-lab-01.onrender.com/about) | `application/json` | Student identity, academic section, and metadata | `200 OK` |
-| `GET` | `/time` | [Open Live Link](https://backend-lab-lab-01.onrender.com/time) | `text/plain` | Dynamic ISO server timestamp generated via `new Date()` | `200 OK` |
-| `ALL` | `/*` | [Open Live Link (404 Test)](https://backend-lab-lab-01.onrender.com/contact) | `text/plain` | Global fallback handler for undefined endpoints | `404 Not Found` |
+| `GET` | `/` | [Open Local Link](http://localhost:3000/) | `text/html` | Server greeting and welcome message | `200 OK` |
+| `GET` | `/about` | [Open Local Link](http://localhost:3000/about) | `application/json` | Student identity, academic section, and metadata | `200 OK` |
+| `GET` | `/time` | [Open Local Link](http://localhost:3000/time) | `text/plain` | Dynamic ISO server timestamp generated via `new Date()` | `200 OK` |
+| `ALL` | `/*` | [Open Local Link (404 Test)](http://localhost:3000/contact) | `text/plain` | Global fallback handler for undefined endpoints | `404 Not Found` |
 
 ---
 
@@ -179,28 +179,28 @@ The test suite validates both successful routes and missing endpoints:
 Screenshots are placed in the [`screenshots/`](screenshots/) directory, documenting all required functional outputs:
 
 ### 1. Welcome Route (`GET /`)
-- **Render Live URL:** [https://backend-lab-lab-01.onrender.com/](https://backend-lab-lab-01.onrender.com/)
+- **Local URL:** [http://localhost:3000/](http://localhost:3000/)
 - **Expected HTTP Status:** `200 OK`
 
 Renders the default root welcome message from the Express server:
 ![Welcome Route](screenshots/home.png)
 
 ### 2. About Route (`GET /about`)
-- **Render Live URL:** [https://backend-lab-lab-01.onrender.com/about](https://backend-lab-lab-01.onrender.com/about)
+- **Local URL:** [http://localhost:3000/about](http://localhost:3000/about)
 - **Expected HTTP Status:** `200 OK`
 
 Displays structured student information and academic section in JSON format:
 ![About Route](screenshots/about.png)
 
 ### 3. Server Time Route (`GET /time`)
-- **Render Live URL:** [https://backend-lab-lab-01.onrender.com/time](https://backend-lab-lab-01.onrender.com/time)
+- **Local URL:** [http://localhost:3000/time](http://localhost:3000/time)
 - **Expected HTTP Status:** `200 OK`
 
 Demonstrates dynamic server execution returning the ISO timestamp via `new Date()`:
 ![Time Route](screenshots/time.png)
 
 ### 4. 404 Route Not Found Handler
-- **Render Live URL:** [https://backend-lab-lab-01.onrender.com/contact](https://backend-lab-lab-01.onrender.com/contact)
+- **Local URL:** [http://localhost:3000/contact](http://localhost:3000/contact)
 - **Expected HTTP Status:** `404 Not Found`
 
 Validates the fallback middleware intercepting unmatched paths with `404 Not Found`:
@@ -231,11 +231,11 @@ Validates the fallback middleware intercepting unmatched paths with `404 Not Fou
 
 4. **Deploy** and wait for the build to complete.
 
-5. **Verify by visiting the deployed Render URLs:**
-   - **Main Server / Greeting:** [https://backend-lab-lab-01.onrender.com/](https://backend-lab-lab-01.onrender.com/)
-   - **Student About Info:** [https://backend-lab-lab-01.onrender.com/about](https://backend-lab-lab-01.onrender.com/about)
-   - **Server Time:** [https://backend-lab-lab-01.onrender.com/time](https://backend-lab-lab-01.onrender.com/time)
-   - **404 Error Test:** [https://backend-lab-lab-01.onrender.com/contact](https://backend-lab-lab-01.onrender.com/contact)
+5. **Verify these routes locally or use the base URL of your own Render service.**
+   - **Main Server / Greeting:** [http://localhost:3000/](http://localhost:3000/)
+   - **Student About Info:** [http://localhost:3000/about](http://localhost:3000/about)
+   - **Server Time:** [http://localhost:3000/time](http://localhost:3000/time)
+   - **404 Error Test:** [http://localhost:3000/contact](http://localhost:3000/contact)
 
 ---
 
