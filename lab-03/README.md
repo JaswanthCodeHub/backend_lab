@@ -1,6 +1,6 @@
 # Lab 3: REST API, Query Parameters, Validation, and Debugging
 
-> **🔗 Live Deployment URL:** [https://backend-lab-lab-03-i8xb.onrender.com](https://backend-lab-lab-03-i8xb.onrender.com) *(or local server at `http://localhost:3000`)*
+> **Local server** [http://localhost:3000](http://localhost:3000) · **Lab 04 on Render** [https://backend-lab-h2hp.onrender.com/](https://backend-lab-h2hp.onrender.com/)
 
 ---
 
@@ -151,15 +151,15 @@ The server implements asynchronous lifecycle startup via `initializeDBAndServer(
 
 All resource endpoints adhere to REST conventions: resources are named as plural nouns (`/books`), and HTTP methods communicate the operation to perform.
 
-| HTTP Method | Path | Live URL | Description | Success Code | Error Codes |
+| HTTP Method | Path | Local URL | Description | Success Code | Error Codes |
 |:---:|---|:---:|---|:---:|:---:|
-| `GET` | `/` | [Open Live Link](https://backend-lab-lab-03-i8xb.onrender.com/) | API Directory, student metadata & system status | `200 OK` | `500` |
-| `GET` | `/books` | [Open Live Link](https://backend-lab-lab-03-i8xb.onrender.com/books) | Retrieve books with optional search, sorting, pagination, and price filters | `200 OK` | `400`, `500` |
-| `GET` | `/books/:bookId` | [Open Live Link (ID 1)](https://backend-lab-lab-lab-03.onrender.com/books/1) | Retrieve a single book record by ID | `200 OK` | `400`, `404`, `500` |
-| `POST` | `/books` | [API Endpoint](https://backend-lab-lab-03-i8xb.onrender.com/books) | Validate payload and insert a new book record | `201 Created` | `400`, `500` |
-| `PUT` | `/books/:bookId` | [API Endpoint (ID 1)](https://backend-lab-lab-03-i8xb.onrender.com/books/1) | Validate payload and update an existing book by ID | `200 OK` | `400`, `404`, `500` |
-| `DELETE` | `/books/:bookId` | [API Endpoint (ID 10)](https://backend-lab-lab-03-i8xb.onrender.com/books/10) | Delete an existing book by ID | `200 OK` | `400`, `404`, `500` |
-| `ALL` | `/*` | [Open Live Link (404 Test)](https://backend-lab-lab-03-i8xb.onrender.com/books/99999) | Fallback route handler for undefined endpoints | — | `404 Not Found` |
+| `GET` | `/` | [Open Local Link](http://localhost:3000/) | API Directory, student metadata & system status | `200 OK` | `500` |
+| `GET` | `/books` | [Open Local Link](http://localhost:3000/books) | Retrieve books with optional search, sorting, pagination, and price filters | `200 OK` | `400`, `500` |
+| `GET` | `/books/:bookId` | [Open Local Link (ID 1)](http://localhost:3000/books/1) | Retrieve a single book record by ID | `200 OK` | `400`, `404`, `500` |
+| `POST` | `/books` | [API Endpoint](http://localhost:3000/books) | Validate payload and insert a new book record | `201 Created` | `400`, `500` |
+| `PUT` | `/books/:bookId` | [API Endpoint (ID 1)](http://localhost:3000/books/1) | Validate payload and update an existing book by ID | `200 OK` | `400`, `404`, `500` |
+| `DELETE` | `/books/:bookId` | [API Endpoint (ID 10)](http://localhost:3000/books/10) | Delete an existing book by ID | `200 OK` | `400`, `404`, `500` |
+| `ALL` | `/*` | [Open Local Link (404 Test)](http://localhost:3000/books/99999) | Fallback route handler for undefined endpoints | — | `404 Not Found` |
 
 ---
 
@@ -392,25 +392,25 @@ Displays Nodemon listening and running on `http://localhost:3000/`:
 ![Server Startup](screenshots/02-server-start-nodemon.png)
 
 ### 3. Search Query Parameter (`GET /books?search_q=fire`)
-- **Render Live URL:** [https://backend-lab-lab-03-i8xb.onrender.com/books?search_q=fire](https://backend-lab-lab-03-i8xb.onrender.com/books?search_q=fire)
+- **Local URL:** [http://localhost:3000/books?search_q=fire](http://localhost:3000/books?search_q=fire)
 - **Expected HTTP Status:** `200 OK`
 
 ![Search Query](screenshots/03-search-query.png)
 
 ### 4. Sorting by Price Descending (`GET /books?order_by=price&order=DESC`)
-- **Render Live URL:** [https://backend-lab-lab-03-i8xb.onrender.com/books?order_by=price&order=DESC](https://backend-lab-lab-03-i8xb.onrender.com/books?order_by=price&order=DESC)
+- **Local URL:** [http://localhost:3000/books?order_by=price&order=DESC](http://localhost:3000/books?order_by=price&order=DESC)
 - **Expected HTTP Status:** `200 OK`
 
 ![Sorting by Price](screenshots/04-sorting-price-desc.png)
 
 ### 5. Pagination with Limit & Offset (`GET /books?limit=2&offset=5`)
-- **Render Live URL:** [https://backend-lab-lab-03-i8xb.onrender.com/books?limit=2&offset=5](https://backend-lab-lab-03-i8xb.onrender.com/books?limit=2&offset=5)
+- **Local URL:** [http://localhost:3000/books?limit=2&offset=5](http://localhost:3000/books?limit=2&offset=5)
 - **Expected HTTP Status:** `200 OK`
 
 ![Pagination](screenshots/05-pagination-limit-offset.png)
 
 ### 6. Price Range Filter (`GET /books?min_price=250&max_price=400`)
-- **Render Live URL:** [https://backend-lab-lab-03-i8xb.onrender.com/books?min_price=250&max_price=400](https://backend-lab-lab-03-i8xb.onrender.com/books?min_price=250&max_price=400)
+- **Local URL:** [http://localhost:3000/books?min_price=250&max_price=400](http://localhost:3000/books?min_price=250&max_price=400)
 - **Expected HTTP Status:** `200 OK`
 
 ![Price Filter](screenshots/06-price-range-filter.png)
@@ -421,7 +421,7 @@ Displays Nodemon listening and running on `http://localhost:3000/`:
 ![POST Create Book](screenshots/07-post-create-book.png)
 
 ### 8. GET Missing Book (`404 Not Found` on `/books/99999`)
-- **Render Live URL:** [https://backend-lab-lab-03-i8xb.onrender.com/books/99999](https://backend-lab-lab-03-i8xb.onrender.com/books/99999)
+- **Local URL:** [http://localhost:3000/books/99999](http://localhost:3000/books/99999)
 - **Expected HTTP Status:** `404 Not Found`
 
 ![GET Missing Book 404](screenshots/08-get-missing-book-404.png)
@@ -497,16 +497,16 @@ As part of the lab debugging curriculum, four intentional errors were analyzed, 
 
 4. **Deploy** and wait for the build to complete.
 
-5. **Verify by visiting the deployed Render URLs:**
-   - **Main Server / Student Info:** [https://backend-lab-lab-03-i8xb.onrender.com/](https://backend-lab-lab-03-i8xb.onrender.com/)
-   - **GET All Books:** [https://backend-lab-lab-03-i8xb.onrender.com/books](https://backend-lab-lab-03-i8xb.onrender.com/books)
-   - **GET Search Title:** [https://backend-lab-lab-03-i8xb.onrender.com/books?search_q=fire](https://backend-lab-lab-03-i8xb.onrender.com/books?search_q=fire)
-   - **GET Sort by Price:** [https://backend-lab-lab-03-i8xb.onrender.com/books?order_by=price&order=DESC](https://backend-lab-lab-03-i8xb.onrender.com/books?order_by=price&order=DESC)
-   - **GET Pagination:** [https://backend-lab-lab-03-i8xb.onrender.com/books?limit=2&offset=5](https://backend-lab-lab-03-i8xb.onrender.com/books?limit=2&offset=5)
-   - **GET Price Filter:** [https://backend-lab-lab-03-i8xb.onrender.com/books?min_price=250&max_price=400](https://backend-lab-lab-03-i8xb.onrender.com/books?min_price=250&max_price=400)
-   - **GET Combined Filters:** [https://backend-lab-lab-03-i8xb.onrender.com/books?search_q=The&min_price=200&max_price=400&order_by=price&order=ASC&limit=5&offset=0](https://backend-lab-lab-03-i8xb.onrender.com/books?search_q=The&min_price=200&max_price=400&order_by=price&order=ASC&limit=5&offset=0)
-   - **GET Single Book (ID 1):** [https://backend-lab-lab-03-i8xb.onrender.com/books/1](https://backend-lab-lab-03-i8xb.onrender.com/books/1)
-   - **GET 404 Error Test (ID 999):** [https://backend-lab-lab-03-i8xb.onrender.com/books/999](https://backend-lab-lab-03-i8xb.onrender.com/books/999)
+5. **Verify these routes locally or use the base URL of your own Render service.**
+   - **Main Server / Student Info:** [http://localhost:3000/](http://localhost:3000/)
+   - **GET All Books:** [http://localhost:3000/books](http://localhost:3000/books)
+   - **GET Search Title:** [http://localhost:3000/books?search_q=fire](http://localhost:3000/books?search_q=fire)
+   - **GET Sort by Price:** [http://localhost:3000/books?order_by=price&order=DESC](http://localhost:3000/books?order_by=price&order=DESC)
+   - **GET Pagination:** [http://localhost:3000/books?limit=2&offset=5](http://localhost:3000/books?limit=2&offset=5)
+   - **GET Price Filter:** [http://localhost:3000/books?min_price=250&max_price=400](http://localhost:3000/books?min_price=250&max_price=400)
+   - **GET Combined Filters:** [http://localhost:3000/books?search_q=The&min_price=200&max_price=400&order_by=price&order=ASC&limit=5&offset=0](http://localhost:3000/books?search_q=The&min_price=200&max_price=400&order_by=price&order=ASC&limit=5&offset=0)
+   - **GET Single Book (ID 1):** [http://localhost:3000/books/1](http://localhost:3000/books/1)
+   - **GET 404 Error Test (ID 999):** [http://localhost:3000/books/999](http://localhost:3000/books/999)
 
 ---
 
