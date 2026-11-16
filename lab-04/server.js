@@ -48,8 +48,8 @@ app.get('/', (request, response) => {
   response.status(200).json({
     message: 'Lab 4: Registration, Login and JWT Authentication',
     student: {
-      name: 'SOMULA SUDHARSHAN REDDY',
-      registrationNumber: '252U1R1231',
+      name: 'Vemuri Jaswanth',
+      registrationNumber: '252U1R1256',
       section: 'CSE-CORE-2E',
       faculty: 'Mr Yugandhar Gurjalwar',
       college: 'Aurora Deemed-to-be-University'
@@ -68,8 +68,8 @@ app.get('/register', (request, response) => {
     method: 'POST',
     endpoint: '/register',
     sampleRequestBody: {
-      username: 'sudharshan',
-      name: 'Sudharshan Reddy',
+      username: 'jaswanth',
+      name: 'Vemuri Jaswanth',
       password: 'pass123'
     }
   })
@@ -106,7 +106,7 @@ app.get('/login', (request, response) => {
     method: 'POST',
     endpoint: '/login',
     sampleRequestBody: {
-      username: 'sudharshan',
+      username: 'jaswanth',
       password: 'pass123'
     }
   })
