@@ -1,6 +1,6 @@
 # Lab 4: Registration, Login and JWT Authentication
 
-> **🔗 Live Deployment URL:** [https://backend-lab-lab-04.onrender.com](https://backend-lab-lab-04.onrender.com) *(or local server at `http://localhost:3000`)*
+> **🔗 Live Deployment URL:** [https://backend-lab-h2hp.onrender.com/](https://backend-lab-h2hp.onrender.com/) *(or local server at `http://localhost:3000`)*
 
 ---
 
@@ -8,13 +8,13 @@
 
 | Field | Details |
 |---|---|
-| **Student Name** | SOMULA SUDHARSHAN REDDY |
-| **Registration Number** | 252U1R1231 |
+| **Student Name** | Vemuri Jaswanth |
+| **Registration Number** | 252U1R1256 |
 | **Section** | CSE-CORE-2E |
 | **Course** | Backend Development Fundamentals |
 | **Faculty** | Mr Yugandhar Gurjalwar |
 | **Institution** | Aurora Deemed-to-be-University |
-| **GitHub Repository** | [https://github.com/ssrssudharshanreddy/backend_lab](https://github.com/ssrssudharshanreddy/backend_lab) |
+| **GitHub Repository** | [https://github.com/JaswanthCodeHub/backend_lab](https://github.com/JaswanthCodeHub/backend_lab) |
 | **Repository Path** | `lab-04/` in course GitHub repository |
 
 ---
@@ -149,12 +149,12 @@ The application implements an asynchronous lifecycle startup routine via `initia
 
 | Method | Endpoint | Live Render Link | Description | Success Status | Error Status |
 |:---:|---|:---:|---|:---:|:---:|
-| **GET** | `/` | [Open Live Link](https://backend-lab-lab-04.onrender.com/) | API status and student verification | `200 OK` | — |
-| **GET** | `/register` | [Open Live Link](https://backend-lab-lab-04.onrender.com/register) | Registration endpoint info & sample payload format | `200 OK` | — |
-| **POST** | `/register` | [API Endpoint](https://backend-lab-lab-04.onrender.com/register) | Register new user with hashed password | `201 Created` | `400 Bad Request`, `500 Error` |
-| **GET** | `/login` | [Open Live Link](https://backend-lab-lab-04.onrender.com/login) | Login endpoint info & sample payload format | `200 OK` | — |
-| **POST** | `/login` | [API Endpoint](https://backend-lab-lab-04.onrender.com/login) | Authenticate user credentials and issue signed JWT | `200 OK` | `400 Bad Request`, `500 Error` |
-| **ALL** | `/*` | [Open Live Link (404 Test)](https://backend-lab-lab-04.onrender.com/notfound) | Catch-all handler for undefined paths | — | `404 Not Found` |
+| **GET** | `/` | [Open Live Link](https://backend-lab-h2hp.onrender.com/) | API status and student verification | `200 OK` | — |
+| **GET** | `/register` | [Open Live Link](https://backend-lab-h2hp.onrender.com/register) | Registration endpoint info & sample payload format | `200 OK` | — |
+| **POST** | `/register` | [API Endpoint](https://backend-lab-h2hp.onrender.com/register) | Register new user with hashed password | `201 Created` | `400 Bad Request`, `500 Error` |
+| **GET** | `/login` | [Open Live Link](https://backend-lab-h2hp.onrender.com/login) | Login endpoint info & sample payload format | `200 OK` | — |
+| **POST** | `/login` | [API Endpoint](https://backend-lab-h2hp.onrender.com/login) | Authenticate user credentials and issue signed JWT | `200 OK` | `400 Bad Request`, `500 Error` |
+| **ALL** | `/*` | [Open Live Link (404 Test)](https://backend-lab-h2hp.onrender.com/notfound) | Catch-all handler for undefined paths | — | `404 Not Found` |
 
 ---
 
@@ -169,8 +169,8 @@ The application implements an asynchronous lifecycle startup routine via `initia
   {
     "message": "Lab 4: Registration, Login and JWT Authentication",
     "student": {
-      "name": "SOMULA SUDHARSHAN REDDY",
-      "registrationNumber": "252U1R1231",
+      "name": "Vemuri Jaswanth",
+      "registrationNumber": "252U1R1256",
       "section": "CSE-CORE-2E",
       "faculty": "Mr Yugandhar Gurjalwar",
       "college": "Aurora Deemed-to-be-University"
@@ -194,8 +194,8 @@ The application implements an asynchronous lifecycle startup routine via `initia
 - **Request Body:**
   ```json
   {
-    "username": "sudharshan",
-    "name": "Sudharshan Reddy",
+    "username": "jaswanth",
+    "name": "Vemuri Jaswanth",
     "password": "securePassword123"
   }
   ```
@@ -212,8 +212,8 @@ The application implements an asynchronous lifecycle startup routine via `initia
 - **Request Body:**
   ```json
   {
-    "username": "sudharshan",
-    "name": "Sudharshan Reddy",
+    "username": "jaswanth",
+    "name": "Vemuri Jaswanth",
     "password": "securePassword123"
   }
   ```
@@ -230,8 +230,8 @@ The application implements an asynchronous lifecycle startup routine via `initia
 - **Request Body:**
   ```json
   {
-    "username": "sudharshan",
-    "name": "Sudharshan Reddy"
+    "username": "jaswanth",
+    "name": "Vemuri Jaswanth"
   }
   ```
 - **Response Status:** `400 Bad Request`
@@ -251,7 +251,7 @@ The application implements an asynchronous lifecycle startup routine via `initia
 - **Request Body:**
   ```json
   {
-    "username": "sudharshan",
+    "username": "jaswanth",
     "password": "securePassword123"
   }
   ```
@@ -287,7 +287,7 @@ The application implements an asynchronous lifecycle startup routine via `initia
 - **Request Body:**
   ```json
   {
-    "username": "sudharshan",
+    "username": "jaswanth",
     "password": "wrongPasswordXYZ"
   }
   ```
@@ -304,7 +304,7 @@ The application implements an asynchronous lifecycle startup routine via `initia
 - **Request Body:**
   ```json
   {
-    "username": "sudharshan"
+    "username": "jaswanth"
   }
   ```
 - **Response Status:** `400 Bad Request`
@@ -354,7 +354,7 @@ HEADER.PAYLOAD.SIGNATURE
 2. **Payload:** Contains the claims (user metadata). In our implementation, we strictly store the identity claim:
    ```json
    {
-     "username": "sudharshan",
+     "username": "jaswanth",
      "iat": 1794656800
    }
    ```
@@ -396,7 +396,7 @@ sqlite3 database/users.db
 SELECT id, username, name, password FROM user;
 
 -- Verify specific user lookup:
-SELECT id, username, name, password FROM user WHERE username = 'sudharshan';
+SELECT id, username, name, password FROM user WHERE username = 'jaswanth';
 
 -- Exit SQLite CLI:
 .exit
@@ -406,7 +406,7 @@ SELECT id, username, name, password FROM user WHERE username = 'sudharshan';
 ```text
 id  username    name              password
 --  ----------  ----------------  ------------------------------------------------------------
-1   sudharshan  Sudharshan Reddy  $2b$10$WpZ9mZ8E9YwQjE7vJqG9NuX9zQ7fE8rY6uT5wR4eP3oI2uY1tT0eO
+1   jaswanth  Vemuri Jaswanth  $2b$10$WpZ9mZ8E9YwQjE7vJqG9NuX9zQ7fE8rY6uT5wR4eP3oI2uY1tT0eO
 ```
 *Note that the `password` column contains the 60-character bcrypt hash rather than plain text.*
 
@@ -418,41 +418,41 @@ All verification screenshots captured during testing are stored in the [`screens
 
 ### 1. Express Server Startup with Nodemon
 - **Local Server Endpoint:** `http://localhost:3000/`
-- **Render Live URL:** [https://backend-lab-lab-04.onrender.com/](https://backend-lab-lab-04.onrender.com/)
+- **Render Live URL:** [https://backend-lab-h2hp.onrender.com/](https://backend-lab-h2hp.onrender.com/)
 
 Shows Nodemon starting the server cleanly on port 3000 and logging database connectivity:
 ![Server Startup](screenshots/01-server-start-nodemon.png)
 
 ### 2. Successful User Registration (`POST /register` -> `201 Created`)
-- **Render Endpoint:** `https://backend-lab-lab-04.onrender.com/register`
+- **Render Endpoint:** `https://backend-lab-h2hp.onrender.com/register`
 - **Expected HTTP Status:** `201 Created`
 
 Demonstrates registering a new user with `username`, `name`, and `password`:
 ![User Registration Success](screenshots/02-register-user-success.png)
 
 ### 3. Duplicate Username Rejection (`POST /register` -> `400 Bad Request`)
-- **Render Endpoint:** `https://backend-lab-lab-04.onrender.com/register`
+- **Render Endpoint:** `https://backend-lab-h2hp.onrender.com/register`
 - **Expected HTTP Status:** `400 Bad Request`
 
 Demonstrates rejection of a username that already exists in the database:
 ![Duplicate Registration 400](screenshots/03-register-duplicate-user-400.png)
 
 ### 4. Successful User Login & JWT Generation (`POST /login` -> `200 OK`)
-- **Render Endpoint:** `https://backend-lab-lab-04.onrender.com/login`
+- **Render Endpoint:** `https://backend-lab-h2hp.onrender.com/login`
 - **Expected HTTP Status:** `200 OK`
 
 Demonstrates authenticating valid credentials and returning a signed `{ jwt_token }`:
 ![Login Success JWT](screenshots/04-login-user-success-jwt.png)
 
 ### 5. Invalid Username Rejection (`POST /login` -> `400 Bad Request`)
-- **Render Endpoint:** `https://backend-lab-lab-04.onrender.com/login`
+- **Render Endpoint:** `https://backend-lab-h2hp.onrender.com/login`
 - **Expected HTTP Status:** `400 Bad Request`
 
 Demonstrates login rejection when the username does not exist:
 ![Invalid Username 400](screenshots/05-login-invalid-username-400.png)
 
 ### 6. Invalid Password Rejection (`POST /login` -> `400 Bad Request`)
-- **Render Endpoint:** `https://backend-lab-lab-04.onrender.com/login`
+- **Render Endpoint:** `https://backend-lab-h2hp.onrender.com/login`
 - **Expected HTTP Status:** `400 Bad Request`
 
 Demonstrates login rejection when the provided password fails `bcrypt.compare`:
@@ -516,12 +516,12 @@ Shows the production Express.js implementation with 0 comments and structured er
 4. **Deploy** and wait for the build to complete.
 
 5. **Verify by visiting the deployed Render URLs:**
-   - **Main Server / Student Info:** [https://backend-lab-lab-04.onrender.com/](https://backend-lab-lab-04.onrender.com/)
-   - **GET Register Info:** [https://backend-lab-lab-04.onrender.com/register](https://backend-lab-lab-04.onrender.com/register)
-   - **GET Login Info:** [https://backend-lab-lab-04.onrender.com/login](https://backend-lab-lab-04.onrender.com/login)
-   - **POST User Registration:** `https://backend-lab-lab-04.onrender.com/register`
-   - **POST User Login & Token Generation:** `https://backend-lab-lab-04.onrender.com/login`
-   - **404 Route Not Found Test:** [https://backend-lab-lab-04.onrender.com/notfound](https://backend-lab-lab-04.onrender.com/notfound)
+   - **Main Server / Student Info:** [https://backend-lab-h2hp.onrender.com/](https://backend-lab-h2hp.onrender.com/)
+   - **GET Register Info:** [https://backend-lab-h2hp.onrender.com/register](https://backend-lab-h2hp.onrender.com/register)
+   - **GET Login Info:** [https://backend-lab-h2hp.onrender.com/login](https://backend-lab-h2hp.onrender.com/login)
+   - **POST User Registration:** `https://backend-lab-h2hp.onrender.com/register`
+   - **POST User Login & Token Generation:** `https://backend-lab-h2hp.onrender.com/login`
+   - **404 Route Not Found Test:** [https://backend-lab-h2hp.onrender.com/notfound](https://backend-lab-h2hp.onrender.com/notfound)
 
 ---
 
@@ -561,8 +561,8 @@ Through **Lab 4**, I achieved the following learning outcomes:
 
 ## 👤 Author & Academic Attribution
 
-**SOMULA SUDHARSHAN REDDY**  
-**Registration Number:** `252U1R1231`  
+**Vemuri Jaswanth**  
+**Registration Number:** `252U1R1256`  
 **Section:** `CSE-CORE-2E`  
 **Department of Computer Science & Engineering**  
 **Aurora Deemed-to-be-University**
