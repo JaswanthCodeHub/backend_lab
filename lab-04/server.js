@@ -1,104 +1,149 @@
 const express = require('express')
+const sqlite3 = require('sqlite3')
+const {open} = require('sqlite')
+const path = require('path')
+const fs = require('fs')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const {initializeDatabase} = require('./db')
 
-// Public classroom-only constant; never use this key for production.
-// Moving configuration to .env is reserved for Lab 08.
-const JWT_SECRET = 'bdf-lab04-classroom-demo-only-not-for-production'
-const SALT_ROUNDS = 10
-const isNonEmptyString = value => typeof value === 'string' && value.trim().length > 0
+const app = express()
+app.use(express.json())
 
-function createApp(db) {
-  const app = express()
-  app.use(express.json())
-  app.get('/', (request, response) => {
-    response.json({message: 'Lab 04: Registration, Login and JWT', status: 'online'})
-  })
-  app.get('/api/health', async (request, response) => {
-    await db.get('SELECT 1')
-    response.json({status: 'OK'})
-  })
-
-  app.post('/register', async (request, response) => {
-    const {username, name, password} = request.body || {}
-    if (![username, name, password].every(isNonEmptyString)) {
-      return response.status(400).json({message: 'username, name and password are required non-empty strings'})
-    }
-    // bcrypt only uses the first 72 bytes. Reject longer inputs instead of truncating.
-    if (Buffer.byteLength(password, 'utf8') > 72) {
-      return response.status(400).json({message: 'password must not exceed 72 UTF-8 bytes'})
-    }
-    const normalizedUsername = username.trim()
-    const existingUser = await db.get('SELECT id FROM users WHERE username = ?', [normalizedUsername])
-    if (existingUser) return response.status(400).json({message: 'Username already exists'})
-
-    const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS)
-    try {
-      await db.run('INSERT INTO users (username, name, password) VALUES (?, ?, ?)',
-        [normalizedUsername, name.trim(), hashedPassword])
-    } catch (error) {
-      // The UNIQUE constraint also prevents duplicates from concurrent requests.
-      if (error.code === 'SQLITE_CONSTRAINT' && error.message.includes('users.username')) {
-        return response.status(400).json({message: 'Username already exists'})
-      }
-      throw error
-    }
-    response.status(201).json({message: 'User registered successfully'})
-  })
-
-  app.post('/login', async (request, response) => {
-    const {username, password} = request.body || {}
-    if (![username, password].every(isNonEmptyString)) {
-      return response.status(400).json({message: 'username and password are required non-empty strings'})
-    }
-    if (Buffer.byteLength(password, 'utf8') > 72) {
-      return response.status(400).json({message: 'password must not exceed 72 UTF-8 bytes'})
-    }
-    const user = await db.get('SELECT username, password FROM users WHERE username = ?', [username.trim()])
-    if (!user) return response.status(400).json({message: 'Unknown username'})
-    if (!(await bcrypt.compare(password, user.password))) {
-      return response.status(400).json({message: 'Incorrect password'})
-    }
-    const token = jwt.sign({username: user.username}, JWT_SECRET, {algorithm: 'HS256', expiresIn: '1h'})
-    response.json({jwt_token: token})
-  })
-
-  app.use((request, response) => response.status(404).json({message: 'Route not found'}))
-  // Express 5 forwards rejected async handlers here. Never return SQL or credentials.
-  app.use((error, request, response, next) => {
-    if (error.type === 'entity.parse.failed') {
-      return response.status(400).json({message: 'Invalid JSON request body'})
-    }
-    if (error.type === 'entity.too.large') {
-      return response.status(413).json({message: 'Request body too large'})
-    }
-    response.status(500).json({message: 'Internal server error'})
-  })
-  return app
+const dbDir = path.join(__dirname, 'database')
+if (!fs.existsSync(dbDir)) {
+  fs.mkdirSync(dbDir, {recursive: true})
 }
 
-async function startServer() {
-  const db = await initializeDatabase()
-  const app = createApp(db)
-  const port = process.env.PORT || 5002
-  const server = app.listen(port, () => console.log(`Server running at http://localhost:${port}`))
-  server.on('error', async () => {
-    console.error('Unable to start server. Check that PORT is available.')
-    await db.close()
-    process.exitCode = 1
-  })
-  for (const signal of ['SIGINT', 'SIGTERM']) {
-    process.once(signal, () => server.close(async () => { await db.close() }))
+const dbPath = path.join(dbDir, 'users.db')
+const secretKey = 'MY_SECRET_KEY'
+let db = null
+
+const initializeDBAndServer = async () => {
+  try {
+    db = await open({
+      filename: dbPath,
+      driver: sqlite3.Database
+    })
+
+    await db.exec(`
+      CREATE TABLE IF NOT EXISTS user (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT UNIQUE,
+        name TEXT,
+        password TEXT
+      );
+    `)
+
+    const port = process.env.PORT || 3000
+    app.listen(port, () => {
+      console.log(`Server Running at http://localhost:${port}/`)
+    })
+  } catch (error) {
+    console.log(`DB Error: ${error.message}`)
+    process.exit(1)
   }
-  return {server, db}
 }
 
-if (require.main === module) {
-  startServer().catch(() => {
-    console.error('Unable to initialize database. Check the database directory and permissions.')
-    process.exitCode = 1
+app.get('/', (request, response) => {
+  response.status(200).json({
+    message: 'Lab 4: Registration, Login and JWT Authentication',
+    student: {
+      name: 'SOMULA SUDHARSHAN REDDY',
+      registrationNumber: '252U1R1231',
+      section: 'CSE-CORE-2E',
+      faculty: 'Mr Yugandhar Gurjalwar',
+      college: 'Aurora Deemed-to-be-University'
+    },
+    status: 'Online',
+    endpoints: {
+      register: 'POST /register',
+      login: 'POST /login'
+    }
   })
-}
+})
 
-module.exports = {createApp, startServer, JWT_SECRET}
+app.get('/register', (request, response) => {
+  response.status(200).json({
+    message: 'Register endpoint is active. Send a POST request with JSON body to register a user.',
+    method: 'POST',
+    endpoint: '/register',
+    sampleRequestBody: {
+      username: 'sudharshan',
+      name: 'Sudharshan Reddy',
+      password: 'pass123'
+    }
+  })
+})
+
+app.post('/register', async (request, response) => {
+  try {
+    const {username, name, password} = request.body
+
+    if (!username || !name || !password) {
+      return response.status(400).send('Username, name and password are required')
+    }
+
+    const selectUserQuery = 'SELECT * FROM user WHERE username = ?;'
+    const existingUser = await db.get(selectUserQuery, [username])
+
+    if (existingUser !== undefined) {
+      return response.status(400).send('Username already exists')
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10)
+    const createUserQuery = 'INSERT INTO user (username, name, password) VALUES (?, ?, ?);'
+    await db.run(createUserQuery, [username, name, hashedPassword])
+
+    response.status(201).send('User registered successfully')
+  } catch (error) {
+    response.status(500).send('Unable to register user')
+  }
+})
+
+app.get('/login', (request, response) => {
+  response.status(200).json({
+    message: 'Login endpoint is active. Send a POST request with JSON body to login and receive a JWT token.',
+    method: 'POST',
+    endpoint: '/login',
+    sampleRequestBody: {
+      username: 'sudharshan',
+      password: 'pass123'
+    }
+  })
+})
+
+app.post('/login', async (request, response) => {
+  try {
+    const {username, password} = request.body
+
+    if (!username || !password) {
+      return response.status(400).send('Username and password are required')
+    }
+
+    const selectUserQuery = 'SELECT * FROM user WHERE username = ?;'
+    const user = await db.get(selectUserQuery, [username])
+
+    if (user === undefined) {
+      return response.status(400).send('Invalid username')
+    }
+
+    const isPasswordMatched = await bcrypt.compare(password, user.password)
+
+    if (!isPasswordMatched) {
+      return response.status(400).send('Invalid password')
+    }
+
+    const payload = {username: username}
+    const jwtToken = jwt.sign(payload, secretKey)
+
+    response.status(200).json({jwt_token: jwtToken})
+  } catch (error) {
+    response.status(500).send('Unable to login')
+  }
+})
+
+app.use((request, response) => {
+  response.status(404).send('Page not found')
+})
+
+initializeDBAndServer()

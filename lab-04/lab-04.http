@@ -1,66 +1,55 @@
-@baseUrl = http://localhost:5002
-@username = jaswanth
-
-### Valid registration - expected 201
-POST {{baseUrl}}/register
+6### 1. Register a new user (201)
+POST http://localhost:3000/register
 Content-Type: application/json
 
 {
-  "username": "{{username}}",
-  "name": "Jaswanth",
-  "password": "Jaswanth123"
+  "username": "sudharshan_reddy",
+  "name": "Sudharshan Reddy",
+  "password": "pass123"
 }
 
-### Duplicate registration - expected 400
-POST {{baseUrl}}/register
+### 2. Register the same username again (400)
+POST http://localhost:3000/register
 Content-Type: application/json
 
 {
-  "username": "{{username}}",
-  "name": "Jaswanth",
-  "password": "Jaswanth123"
+  "username": "sudharshan_reddy",
+  "name": "Sudharshan Reddy",
+  "password": "pass123"
 }
 
-### Missing registration field - expected 400
-POST {{baseUrl}}/register
+### 3. Login with correct credentials (200)
+POST http://localhost:3000/login
 Content-Type: application/json
 
 {
-  "username": "{{username}}",
-  "password": "Jaswanth123"
+  "username": "sudharshan_reddy",
+  "password": "pass123"
 }
 
-### Valid login - expected 200
-POST {{baseUrl}}/login
+### 4. Login with an unknown username (400)
+POST http://localhost:3000/login
 Content-Type: application/json
 
 {
-  "username": "{{username}}",
-  "password": "Jaswanth123"
+  "username": "unknownuser",
+  "password": "pass123"
 }
 
-### Unknown username - expected 400
-POST {{baseUrl}}/login
+### 5. Login with a wrong password (400)
+POST http://localhost:3000/login
 Content-Type: application/json
 
 {
-  "username": "{{username}}_unknown",
-  "password": "Jaswanth123"
+  "username": "sudharshan_reddy",
+  "password": "wrong123"
 }
 
-### Incorrect password - expected 400
-POST {{baseUrl}}/login
+### 6. Register with missing data (400)
+POST http://localhost:3000/register
 Content-Type: application/json
 
 {
-  "username": "{{username}}",
-  "password": "Wrong123"
-}
-
-### Missing login field - expected 400
-POST {{baseUrl}}/login
-Content-Type: application/json
-
-{
-  "username": "{{username}}"
+  "username": "newuser",
+  "name": "New User"
 }
